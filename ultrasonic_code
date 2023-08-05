@@ -1,0 +1,26 @@
+const int trigger=9; 
+const int echo=10; 
+float dist;
+void setup(){
+  Serial.begin(9600);
+  pinMode(trigger,OUTPUT);
+  pinMode(echo,INPUT);
+}
+void loop(){
+  digitalWrite(trigger,LOW);
+  delayMicroseconds(5);        
+  digitalWrite(trigger,HIGH);  
+  delayMicroseconds(10);      
+  digitalWrite(trigger,LOW); 
+  dist=pulseIn(echo,HIGH);      
+  dist = dist/58;                  // Se hace la conversión a centímetros
+                                   // Si quisieramos convertirlo a pulgadas, dividimos entre 148.
+  Serial.print ("Distancia = ");
+  Serial.print (dist);         
+  Serial.print (" cm");         
+  Serial.write (10);            
+  delay (200);                
+}                             
+
+
+
